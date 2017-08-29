@@ -8,6 +8,9 @@ export default class RollingMessage extends React.Component {
     this.animate = this.animate.bind(this)
     this.animatedValue = new Animated.Value(0)
     this.height = props.height || 40
+    this.childrenHeight = props.childrenHeight || 20
+    this.centerPosition = (this.height - this.childrenHeight) / 2
+    this.dataIsArray = props.children.length && props.children.length > 1
     this.state = {
       currentIndex: 0
     }
@@ -27,17 +30,19 @@ export default class RollingMessage extends React.Component {
         easing: Easing.linear
       }
     ).start(() => {
-      this.setState({currentIndex: (this.state.currentIndex + 1) % this.props.children.length})
+      if (this.dataIsArray) {
+        this.setState({currentIndex: (this.state.currentIndex + 1) % this.props.children.length})
+      }
       this.animate()
     })
   }
 
   render() {
     const { currentIndex } = this.state
-    const { containerStyle } = this.props
+    const { containerStyle, childrenStyle } = this.props
     const top = this.animatedValue.interpolate({
       inputRange: [0, 0.2, 0.5, 0.8, 1],
-      outputRange: [0, this.height / 2, this.height / 2, this.height / 2, this.height]
+      outputRange: [0, this.centerPosition, this.centerPosition, this.centerPosition, this.height - this.childrenHeight]
     })
     const opacity = this.animatedValue.interpolate({
       inputRange: [0, 0.2, 0.5, 0.8, 1],
@@ -46,16 +51,16 @@ export default class RollingMessage extends React.Component {
     return (
       <View style={[{
         height: this.height,
-        flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center'
       }, containerStyle]}>
-        <Animated.View style={{
+        <Animated.View style={[{
           position: 'absolute',
+          height: this.childrenHeight,
           top,
           opacity
-        }}>{this.props.children[currentIndex]}</Animated.View>
+        }, childrenStyle]}>{this.dataIsArray ? this.props.children[currentIndex] : this.props.children}</Animated.View>
       </View>
     );
   }

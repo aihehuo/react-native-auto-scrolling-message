@@ -14,8 +14,10 @@ export default class App extends React.Component {
     return (
       <ScrollingMessageView
         height={40}
+        childrenHeight={20}
         duration={2000}
-        containerStyle={{backgroundColor: '#333'}}
+        containerStyle={{backgroundColor: '#fff'}}
+        childrenStyle={{backgroundColor: '#fff'}}
       >
         <View>
           <Image source={{uri: 'https://facebook.github.io/react/img/logo_og.png'}}
@@ -33,5 +35,7 @@ export default class App extends React.Component {
 
 ### Props
 * height: container height, default 40
+* childrenHeight: scrolling object height, default 20
 * duration: duration for each flash, default 2000ms
 * containerStyle: custom style for the component container
+* childrenStyle: custom scrolling object style
