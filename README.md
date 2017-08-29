@@ -30,3 +30,8 @@ export default class App extends React.Component {
   }
 }
 ```
+
+### Props
+* height: container height, default 40
+* duration: duration for each flash, default 2000ms
+* containerStyle: custom style for the component container
