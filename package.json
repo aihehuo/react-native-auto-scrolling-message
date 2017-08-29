@@ -13,6 +13,10 @@
     "auto-scroll",
     "message-board"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aihehuo/react-native-auto-scrolling-message.git"
+  },
   "author": "BranLiang",
   "license": "ISC"
 }
