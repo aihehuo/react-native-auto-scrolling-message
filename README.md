@@ -1,5 +1,8 @@
 ## react-native-auto-scrolling-message
 
+### Demo
+![](./demo.gif)
+
 ### Basic usage
 ```js
 import React from 'react';
